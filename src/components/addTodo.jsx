@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import "../App.css"
 import { Button, Form, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 
 export default function AddTodo({ submitHandler }) {
     const [text, setText] = useState('');
-    const [priority, setPriority] = useState(0);
+    const [priority, setPriority] = useState(1);
     const [date, setDate] = useState(Date());
 
     const onTextChange = (value) => {
@@ -29,15 +28,16 @@ export default function AddTodo({ submitHandler }) {
         }
         submitHandler(todoItem);
         setText('');
-        setPriority(0)
+        setPriority(1)
         setDate(Date())
     }
 
 
     return (
-        <div className="App-form">
+        <div>
             <Form onSubmit={(event) => handleOnSubmit(event)}>
-                <Form.Group >
+                <Form.Group>
+                    <Form.Label>Add A New Todo: </Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="new todo..."
@@ -47,8 +47,8 @@ export default function AddTodo({ submitHandler }) {
                     />
                 </Form.Group>
 
-                <Form.Group >
-                    <Form.Label>Priority</Form.Label>
+                <Form.Group>
+                    <Form.Label>Priority: </Form.Label>
                     <ToggleButtonGroup
                         type="radio"
                         name="priority"
@@ -56,9 +56,9 @@ export default function AddTodo({ submitHandler }) {
                         value={priority}
                         required
                     >
-                        <ToggleButton value={1}>1</ToggleButton>
-                        <ToggleButton value={2}>2</ToggleButton>
-                        <ToggleButton value={3}>3</ToggleButton>
+                        <ToggleButton value={1}>Low</ToggleButton>
+                        <ToggleButton value={2}>Moderate</ToggleButton>
+                        <ToggleButton value={3}>Urgent</ToggleButton>
                     </ToggleButtonGroup>
                 </Form.Group>
                 <Form.Group>

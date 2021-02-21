@@ -1,6 +1,4 @@
 import React, { useState } from "react"
-// import logo from './logo.svg';
-import "../App.css"
 import AddTodo from "./addTodo"
 import TodoModal from "./todoModal"
 import Header from "./header"
@@ -8,7 +6,7 @@ import TodoItem from "./todoItem"
 import DoneItem from "./doneItem.jsx"
 import {Modal, Card} from "react-bootstrap"
 
-export default function TodoApp() {
+export default function TodoApp({ userName }) {
 
   const [item, setItem] = useState({})
 
@@ -35,7 +33,6 @@ export default function TodoApp() {
   }
 
   const submitHandler = (item) => {
-    console.log(item.date);
     todos.push(item)
     setTodos([...todos.sort((a, b) => {
       if (b.priority > a.priority) { return 1 }
@@ -65,6 +62,7 @@ export default function TodoApp() {
   }
 
   const doneHandler = (item) => {
+    item.priority = 0
     setTodos(todos.filter(todo => todo.key !== item.key))
     setDones([item, ...dones])
     closeModal()
@@ -77,13 +75,11 @@ export default function TodoApp() {
 
   return (
     <div className="App">
-      <Header />
-      <div>New Todo</div>
+      <Header userName={userName}/>
       <AddTodo
-        className="App-form"
         submitHandler={submitHandler}
       />
-      <h3>Todo List</h3>
+      <h1>Todo List</h1>
       {todos.map(item => {
         return (
           <TodoItem
@@ -94,8 +90,6 @@ export default function TodoApp() {
         )
       })}
 
-      {/* <img src={logo} className="App-logo" alt="logo" /> */}
-
       <h1>Done</h1>
       {dones.map(item => {
         return (
@@ -105,7 +99,9 @@ export default function TodoApp() {
           />
         )
       })}
-      <Modal show={todoModalOpen} onHide={closeModal}>
+      <Modal
+        show={todoModalOpen}
+        onHide={closeModal}>
         <Card>
           <TodoModal
             closeModal={closeModal}

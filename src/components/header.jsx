@@ -1,10 +1,9 @@
 import React from 'react';
-import "../App.css"
 
-export default function Header() {
+export default function Header({userName}) {
     return (
-        <div className="App-header">
-            <span >Todo App</span>
+        <div>
+            <span >{userName}'s Todo App</span>
         </div>
     );
 }

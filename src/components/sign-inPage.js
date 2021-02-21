@@ -1,16 +1,20 @@
 import React from 'react'
-import { Link, BrowserRouter } from 'react-router-dom'
+import "../App.css"
 import FacebookSignIn from './facebook-sign-in'
 import GoogleSignIn from './google-sign-in'
 
-export default function SignInPage() {
+export default function SignInPage({setUserName}) {
 
-
+    const fetchingUser = (userName) => {
+        setUserName(userName)
+    }
 
     return (
         <div>
-            <FacebookSignIn/>
-            <GoogleSignIn/>
+            <h1>Welcome!</h1>
+            <h2>Please Sign In</h2>
+            <FacebookSignIn fetchingUser={fetchingUser}/>
+            <GoogleSignIn fetchingUser={fetchingUser}/>
         </div>
     )
 }

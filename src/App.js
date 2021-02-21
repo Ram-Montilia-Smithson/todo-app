@@ -1,20 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TodoApp from "./components/todoApp"
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import GoogleSignIn from "./components/google-sign-in"
-import FacebookSignIn from "./components/facebook-sign-in"
 import SignInPage from "./components/sign-inPage"
 
-
 export default function App() {
+
+    const [userName, setUserName] = useState(null)
+
     return (
         <div>
             <BrowserRouter>
                 <Switch>
-                    <Route path="/app" component={TodoApp} />
-                    <Route exact path="/" component={SignInPage}/>
-                    {/* <Route path="/google" component={GoogleSignIn} /> */}
-                    {/* <Route path="/facebook" component={FacebookSignIn}/> */}
+                    <Route path="/app"><TodoApp userName={userName} /></Route>
+                    <Route exact path="/"><SignInPage setUserName={setUserName}/></Route>
                 </Switch>
             </BrowserRouter>
         </div>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import "../App.css"
 import { Button, Form, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 
 export default function EditTodo({closeModal, deleteHandler, doneHandler, editHandler, item }) {
@@ -47,9 +46,10 @@ export default function EditTodo({closeModal, deleteHandler, doneHandler, editHa
     }
 
     return (
-        <div className="App-form">
+        <div>
             <Form onSubmit={(event) => handleOnEdit(event)}>
-                <Form.Group >
+                <Form.Group>
+                    <Form.Label>Edit Todo: </Form.Label>
                     <Form.Control
                         type="text"
                         placeholder={item.text}
@@ -59,16 +59,16 @@ export default function EditTodo({closeModal, deleteHandler, doneHandler, editHa
                 </Form.Group>
 
                 <Form.Group >
-                    <Form.Label>Priority</Form.Label>
+                    <Form.Label>Priority: </Form.Label>
                     <ToggleButtonGroup
                         type="radio"
                         name="priority"
                         onChange={(event) => onPriorityChange(event)}
                         value={priority}
                     >
-                        <ToggleButton value={1}>1</ToggleButton>
-                        <ToggleButton value={2}>2</ToggleButton>
-                        <ToggleButton value={3}>3</ToggleButton>
+                        <ToggleButton value={1}>Low</ToggleButton>
+                        <ToggleButton value={2}>Moderate</ToggleButton>
+                        <ToggleButton value={3}>Urgent</ToggleButton>
                     </ToggleButtonGroup>
                 </Form.Group>
                 <Form.Group>
@@ -86,13 +86,3 @@ export default function EditTodo({closeModal, deleteHandler, doneHandler, editHa
         </div>
     );
 }
-
-// const styles = StyleSheet.create({
-//     input: {
-//         marginBottom: 10,
-//         paddingHorizontal: 8,
-//         paddingVertical: 6,
-//         borderBottomWidth: 1,
-//         borderBottomColor: '#ddd',
-//     },
-// });
