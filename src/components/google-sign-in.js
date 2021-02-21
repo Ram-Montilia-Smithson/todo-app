@@ -1,41 +1,44 @@
 import React from 'react'
 import firebase from "firebase"
 import { auth } from "./firebase"
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
     
 export default function GoogleSignIn() {
         
     const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithRedirect(provider);
+    const history = useHistory()
 
-    firebase.auth()
-        .getRedirectResult()
-        .then((result) => {
-            if (result.credential) {
-                // /** @type {firebase.auth.OAuthCredential} */
-                // var credential = result.credential;
+
+    const handleGoogle = () => {
+        firebase.auth()
+            .signInWithPopup(provider)
+            .then((result) => {
+                /** @type {firebase.auth.OAuthCredential} */
+                var credential = result.credential;
 
                 // This gives you a Google Access Token. You can use it to access the Google API.
-                // var token = credential.accessToken;
+                var token = credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
                 // ...
-            }
-            // The signed-in user info.
-            // var user = result.user;
-        }).catch((error) => {
-            // Handle Errors here.
-            // var errorCode = error.code;
-            // var errorMessage = error.message;
-            // The email of the user's account used.
-            // var email = error.email;
-            // The firebase.auth.AuthCredential type that was used.
-            // var credential = error.credential;
-            // ...
-        });
+                history.push("/app")
+            }).catch((error) => {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ...
+            });
+    }
 
     return (
         <div>
-            <Redirect to="/app"/>
+            <Button onClick={() => handleGoogle()}>Google</Button>
         </div>
     )
 }

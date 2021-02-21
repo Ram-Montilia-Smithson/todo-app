@@ -3,7 +3,7 @@ import TodoApp from "./components/todoApp"
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import GoogleSignIn from "./components/google-sign-in"
 import FacebookSignIn from "./components/facebook-sign-in"
-
+import SignInPage from "./components/sign-inPage"
 
 
 export default function App() {
@@ -12,8 +12,9 @@ export default function App() {
             <BrowserRouter>
                 <Switch>
                     <Route path="/app" component={TodoApp} />
-                    {/* <Route path="/" component={GoogleSignIn} /> */}
-                    {/* <Route path="/" component={FacebookSignIn}/> */}
+                    <Route exact path="/" component={SignInPage}/>
+                    {/* <Route path="/google" component={GoogleSignIn} /> */}
+                    {/* <Route path="/facebook" component={FacebookSignIn}/> */}
                 </Switch>
             </BrowserRouter>
         </div>
